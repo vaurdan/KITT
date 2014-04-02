@@ -1,0 +1,156 @@
+body {
+    font-family: Arial;
+    overflow:hidden;
+}
+
+.escurecimento {
+    position:absolute;
+    top:0; right:0;
+    bottom:0; left:0;
+    background: black;
+    z-index: -1;
+}
+
+
+.vidro-carro {
+    position:absolute;
+    top:0; right:0;
+    bottom:0; left:0;
+    background: url("img/estrada.jpg");
+    background-size: cover;
+    min-width: 1300px;
+    min-height: 700px;
+    z-index: -999;
+
+
+}
+
+.vidro-carro .retrovisor-corpo {
+    background: url("img/retrovisor.png") no-repeat -10px;
+    background-size: cover;
+    margin: 0 auto;
+    width: 400px;
+    height: 150px;
+}
+
+.vidro-carro .retrovisor-conteudo {
+    width: 295px;
+    height: 70px;
+    margin-top: 34px;
+    float: left;
+    margin-left: 45px;
+}
+
+.vidro-carro .barra-escurecimento {
+    margin-left: 3px;
+    box-sizing: border-box;
+    border: 1px solid gray;
+    position: absolute;
+    top: 0px;
+    width: 15px;
+    height: 100%;
+    float: left;
+    background-color: #484848;
+    opacity: 0.7;
+}
+
+.barra-escurecimento .percentagem {
+    width:100%;
+    position: absolute;
+    bottom: 0px;
+    background: #1A1A1A;
+}
+
+.vidro-carro .barra-valor-percentagem {
+    display:none;
+    position: absolute;
+    bottom: 0px;
+    color: white;
+    font-weight: bold;
+}
+
+
+.vidro-carro .gps-corpo {
+    position: absolute;
+    top: 0px;
+
+    width: 300px;
+    height: 300px;
+    float: left;
+    margin-left: 100px;
+    margin-top: 50px;
+    opacity: 0.9;
+    z-index: 2;
+}
+
+.gps-corpo .imagem {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url("img/staticmap.png") no-repeat center;
+    border-radius: 10000px;
+
+}
+.gps-corpo > .botao {
+    padding-top: 5px;
+    padding-bottom: 37px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 1px solid black;
+    float: left;
+    color: white;
+    background: black;
+    z-index: 1;
+}
+
+.botao.definicao {
+    -webkit-transform: rotate(34deg);
+    transform: rotate(34deg);
+    ms-transform: rotate(34deg);
+    position: absolute;
+    right: 11px;
+    top: -3px;
+    z-index: -1;
+}
+
+
+.botao:hover {
+    background: gray;
+}
+
+.botao.botao-selecionado {
+    background: gray;
+}
+
+.gps-corpo .definicoes {
+    display:none;
+    width: 215px;
+    float: left;
+    position: absolute;
+    top: 48px;
+    left: 38px;
+    height: 195px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.definicoes h2 {
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+.definicoes > .botao {
+    margin-top: 10px;
+    padding: 10px;
+    border: 2px solid black;
+    text-align: center;
+    border-radius: 7px;
+    background-color: #4A4A3C;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+}
