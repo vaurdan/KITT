@@ -1,6 +1,12 @@
 body {
     font-family: Arial;
     overflow:hidden;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .escurecimento {
@@ -21,7 +27,6 @@ body {
     min-width: 1300px;
     min-height: 700px;
     z-index: -999;
-
 
 }
 
@@ -91,6 +96,7 @@ body {
     left: 0;
     background: url("img/staticmap.png") no-repeat center;
     border-radius: 10000px;
+    border: 2px solid black
 
 }
 .gps-corpo > .botao {
@@ -105,6 +111,18 @@ body {
     z-index: 1;
 }
 
+.botao.voltar {
+    padding-top: 37px;
+    padding-bottom: 5px;
+    -webkit-transform: rotate(-36deg);
+    transform: rotate(-39deg);
+    ms-transform: rotate(-36deg);
+    position: absolute;
+    right: 19px;
+    bottom: -1px;
+    z-index: -1;
+}
+
 .botao.definicao {
     -webkit-transform: rotate(34deg);
     transform: rotate(34deg);
@@ -115,6 +133,25 @@ body {
     z-index: -1;
 }
 
+.botao.navegar {
+    -webkit-transform: rotate(-55deg);
+    transform: rotate(-55deg);
+    ms-transform: rotate(-55deg);
+    position: absolute;
+    left: -23px;
+    top: 34px;
+    z-index: -1;
+}
+
+.botao.alertas {
+    -webkit-transform: rotate(-13deg);
+    transform: rotate(-13deg);
+    ms-transform: rotate(-13deg);
+    position: absolute;
+    left: 76px;
+    top: -23px;
+    z-index: -1;
+}
 
 .botao:hover {
     background: gray;
@@ -153,4 +190,81 @@ body {
     color: white;
     text-transform: uppercase;
     font-weight: bold;
+}
+
+.definicoes > .botao.selecionado,
+.definicoes > .botao:hover {
+    background: black;
+}
+
+.vidro-carro .alerta {
+    margin: 0 auto;
+    width: 450px;
+    height: auto;
+    text-align: center;
+    padding: 10px;
+    border-radius: 7px;
+    background: gray;
+    color: Black;
+    opacity: 0.7;
+}
+
+.alerta .icon {
+    font-family: FontAwesome;
+    float:left;
+    width: 60px;
+    height: 60px;
+    font-size: 60px;
+}
+
+.alerta .icon.sol:before {
+    content: "\f185";
+}
+
+.alerta .mensagem-dual {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.alerta .mensagem-dual p {
+    font-size: 16px;
+    font-weight: normal;
+    padding: 0px;
+    margin: 0px;
+    margin-top: 10px;
+}
+
+.alerta .mensagem-single {
+    line-height: 50px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.icon + .mensagem-single {
+    font-size: 20px;
+    line-height: 60px;
+
+}
+
+.vidro-carro .volante {
+    width: 400px;
+    height: 200px;
+    background: url('img/volante_cortado.png') no-repeat;
+    position: absolute;
+    bottom: 0px;
+    left: 140px;
+    background-size: cover;
+}
+
+.volante .botao {
+    width: 30px;
+    height: 30px;
+    background: black;
+    position: absolute;
+}
+
+.volante .botao#botao_volante_1 {
+    top: 62px;
+    left: 57px;
+    -webkit-transform: rotate(45deg);
 }
