@@ -8,6 +8,7 @@ var curr_screen;
 var curr_buttom;
 
 var screen_history = new Array();
+var botoes_disponiveis = [];
 var tipo_escurecimento = 0; //0 - Automático; 1 - Manual
 /**
  * Array onde se guardam os ecrãs.
@@ -17,7 +18,8 @@ var screens = {
     'escurecimento-ecra': 'definicao',
     'definicoes-ecra': 'definicao',
     'alertas-ecra': 'alertas',
-    'navegacao-ecra': 'navegacao'
+    'navegacao-ecra': 'navegacao',
+    'escurecimento-manual-ecra': 'definicao'
 };
 
 function escurecer_vidro(percentagem, alertas) {
@@ -71,6 +73,7 @@ function mudar_ecra(ecra) {
     curr_buttom.addClass("botao-selecionado");
     curr_screen = $("#"+ecra);
     curr_screen.show(100);
+    botoes_disponiveis = $(".definicoes#" + ecra +" .botao");
 
 }
 
@@ -83,11 +86,13 @@ function voltar_ecra() {
     if(screen_name == "return_to_home") {
         if(curr_buttom!=undefined) curr_buttom.removeClass("botao-selecionado");
         screen_history = new Array();
+        botoes_disponiveis = $(".gps-corpo > .botao");
         return;
     }
 
     curr_screen = $("#"+screen_name);
     curr_screen.show(100);
+    botoes_disponiveis = $(".definicoes#" + screen_name +" .botao");
 
     if(curr_buttom!=undefined) {
         curr_buttom.removeClass("botao-selecionado");
@@ -95,15 +100,7 @@ function voltar_ecra() {
     curr_buttom = $("."+screens[screen_name]);
     curr_buttom.addClass("botao-selecionado");
 }
-/**
- *  <div class="alerta">
- <div class="icon"></div>
- <div class="mensagem">O KITT foi iniciado com sucesso!
- <p>Bla Bla, outra mensagem</p><i class="fa fa-camera-retro fa-5x">
- </div>
- <div style="clear: both"></div>
- </div>
- */
+
 function inserir_alerta(icon, linha1, linha2) {
     //Remover alertas antigos
     $(".alerta").remove();
@@ -141,16 +138,33 @@ function actualizar_botao_escurecimento() {
 $( document ).ready(function() {
     //Inicializamos a escuridão do ecrã a 0
     escurecer_vidro(0,false);
-
+    //Inicializamos os botões disponiveis com os de topo
+    botoes_disponiveis = $(".gps-corpo > .botao");
     //Colocar os botões de escurecimento manual e automatico selecionados de acordo com a variavel
     actualizar_botao_escurecimento();
+
     //Ao clicar no link de escurecimento
-    $("#escurecer-ecra").click(function() {
+    $("#aumentar-escuro-botao").click(function() {
         percentagem_escurecimento += 10;
         //Garantimos que não passa dos 100%
-        percentagem_escurecimento %= 110;
-
+        if(percentagem_escurecimento > 100) {
+            percentagem_escurecimento = 100;
+            return;
+        }
         escurecer_vidro(percentagem_escurecimento);
+    });
+
+    $("#diminuir-escuro-botao").click(function() {
+        percentagem_escurecimento -= 10;
+        if(percentagem_escurecimento < 0) {
+            percentagem_escurecimento = 0;
+            return;
+        }
+        escurecer_vidro(percentagem_escurecimento);
+    });
+
+    $("#limpar-botao").click(function() {
+        escurecer_vidro(0);
     });
 
     $(".barra-escurecimento").click(function(e) {
@@ -185,7 +199,6 @@ $( document ).ready(function() {
     /** Fim de botões de navegação principal **/
 
 
-
     $("#automatico-botao").click(function() {
         escurecer_vidro(0,false);
         tipo_escurecimento = 0;
@@ -198,6 +211,8 @@ $( document ).ready(function() {
         actualizar_botao_escurecimento();
         mudar_ecra('escurecimento-manual-ecra');
     });
+
+    $("#aumentar-escuro-botao").lc
 
 
 

@@ -17,6 +17,9 @@ body {
     z-index: -1;
 }
 
+.botao {
+    cursor:pointer;
+}
 
 .vidro-carro {
     position:absolute;
@@ -57,6 +60,7 @@ body {
     float: left;
     background-color: #484848;
     opacity: 0.7;
+    cursor:pointer;
 }
 
 .barra-escurecimento .percentagem {
@@ -86,6 +90,26 @@ body {
     margin-top: 50px;
     opacity: 0.9;
     z-index: 2;
+}
+
+.gps-corpo .localizacao {
+    width: 20px;
+    height: 20px;
+    font-family: FontAwesome;
+    font-size: 20px;
+    color: cadetblue;
+    position: absolute;
+    top: 200px;
+    z-index: 1;
+    /* opacity: 0.7; */
+    left: 145px;
+    -webkit-transform: rotate(-95deg);
+    transform: rotate(-95deg);
+    ms-transform: rotate(-95deg);
+}
+
+.localizacao:before {
+    content: "\f04b";
 }
 
 .gps-corpo .imagem {
@@ -153,7 +177,8 @@ body {
     z-index: -1;
 }
 
-.botao:hover {
+.gps-corpo > .botao:hover,
+.gps-corpo > .botao.hover {
     background: gray;
 }
 
@@ -172,6 +197,7 @@ body {
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     padding: 5px;
+    z-index: 2;
 }
 
 .definicoes h2 {
@@ -193,7 +219,8 @@ body {
 }
 
 .definicoes > .botao.selecionado,
-.definicoes > .botao:hover {
+.definicoes > .botao:hover,
+.definicoes > .botao.hover {
     background: black;
 }
 
@@ -219,6 +246,10 @@ body {
 
 .alerta .icon.sol:before {
     content: "\f185";
+}
+
+.alerta .icon.power-off:before {
+    content: "\f011";
 }
 
 .alerta .mensagem-dual {
@@ -247,8 +278,8 @@ body {
 }
 
 .vidro-carro .volante {
-    width: 400px;
-    height: 200px;
+    width: 500px;
+    height: 250px;
     background: url('img/volante_cortado.png') no-repeat;
     position: absolute;
     bottom: 0px;
@@ -257,14 +288,109 @@ body {
 }
 
 .volante .botao {
-    width: 30px;
+    width: 40px;
     height: 30px;
-    background: black;
     position: absolute;
+    text-align: center;
 }
 
 .volante .botao#botao_volante_1 {
-    top: 62px;
+    width: 43px;
+    height: 43px;
+    top: 89px;
     left: 57px;
+    -webkit-transform: rotate(36deg);
+    transform: rotate(36deg);
+    ms-transform: rotate(36deg);
+    font-family: FontAwesome;
+    font-size: 40px;
+   }
+
+.volante .botao#botao_volante_1 .cima {
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+.volante .botao#botao_volante_1 .baixo {
+    float: right;
+    width: 50%;
+    height: 100%;
+}
+
+.volante .botao#botao_volante_1 .cima:before {
+    content: "\f104";
+}
+.volante .botao#botao_volante_1 .baixo:before {
+    content: "\f105";
+}
+
+.volante .botao#botao_volante_2 {
+    top: 70px;
     -webkit-transform: rotate(45deg);
+    transform: rotate(50deg);
+    ms-transform: rotate(50deg);
+    left: 81px;
+    text-align: center;
+    font-weight: bold;
+    line-height: 30px;
+}
+
+.volante .botao#botao_volante_3 {
+    right: 68px;
+    top: 70px;
+    -webkit-transform: rotate(-46deg);
+    transform: rotate(-46deg);
+    ms-transform: rotate(-46deg);
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 30px;
+}
+
+.volante .botao#botao_volante_4 {
+    right: 46px;
+    top: 96px;
+    -webkit-transform: rotate(-36deg);
+    transform: rotate(-36deg);
+    ms-transform: rotate(-36deg);
+    line-height: 32px;
+}
+
+.volante .botao#botao_volante_4:before {
+    content: "\f011";
+    font-family: FontAwesome;
+    font-size: 30px;
+}
+
+.volante .comhover:hover,
+.volante .comhover.hover{
+    color: #1A1A1A;
+}
+
+.incrementar .botao {
+    width: 45%;
+    font-family: FontAwesome;
+    font-size: 60px;
+    text-align: center;
+    color: #4A4A3C;
+}
+
+.incrementar .botao:hover,
+.incrementar .botao.hover {
+    color: black;
+}
+
+.incrementar .botao#aumentar-escuro-botao {
+    float: left;
+}
+.incrementar .botao#aumentar-escuro-botao:before {
+    content: "\f055";
+}
+
+.incrementar .botao#diminuir-escuro-botao {
+    float: right;
+}
+
+.incrementar .botao#diminuir-escuro-botao:before {
+   content: "\f056";
 }

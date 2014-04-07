@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="style.css" />
     <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/navegacao.js"></script>
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <meta charset="UTF-8" />
 
@@ -18,9 +19,10 @@
         </div>
 
         <div class="gps-corpo">
+            <div class="localizacao"></div>
             <div class="imagem">
                 <div class="definicoes" id="definicoes-ecra">
-                    <h2>Definicoes</h2>
+                    <h2>Definições</h2>
                     <div class="botao" id="escurecimento-botao">Escurecimento</div>
                 </div>
                 <div class="definicoes" id="escurecimento-ecra">
@@ -30,8 +32,12 @@
                 </div>
                 <div class="definicoes" id="escurecimento-manual-ecra">
                     <h2>Escurecimento Manual</h2>
-
-                    <a id="escurecer-ecra" href="#">Escurecer</a> | <a href="#" onclick="escurecer_vidro(0)">Limpar</a>
+                    <div class="incrementar" style="width: 100%;">
+                        <div class="botao" id="aumentar-escuro-botao"></div>
+                        <div class="botao" id="diminuir-escuro-botao"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="botao" id="limpar-botao">Limpar</div>
                 </div>
                 <div class="definicoes" id="alertas-ecra">
                     <h2>Alertas</h2>
@@ -49,9 +55,13 @@
         </div>
         <div class="barra-valor-percentagem">0%</div>
         <div class="volante">
-            <div class="botao" id="botao_volante_1"></div>
-            <div class="botao" id="botao_volante_2"></div>
-            <div class="botao" id="botao_volante_3"></div>
+            <div class="botao" id="botao_volante_1">
+                <div class="cima comhover"></div>
+                <div class="baixo comhover"></div>
+            </div>
+            <div class="botao comhover" id="botao_volante_2">OK</div>
+            <div class="botao comhover" id="botao_volante_3">BACK</div>
+            <div class="botao comhover" id="botao_volante_4"></div>
 
         </div>
     </div>
