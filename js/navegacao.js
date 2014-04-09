@@ -2,23 +2,28 @@
  * Created by henrique on 4/6/14.
  */
 var botao_actual = 0;
-var $botao;
 var estado;
+var $botao;
+
 
 function subir_botao() {
-    botao_actual = (botao_actual + 1) % botoes_disponiveis.size();
+    botao_actual = (botao_actual + 1) % botoes_disponiveis.length;
     actualizar_botao();
 }
 
 function descer_botao() {
-    botao_actual = (botao_actual - 1 ) % botoes_disponiveis.size();
+    botao_actual = (botao_actual - 1 ) % botoes_disponiveis.length;
     actualizar_botao();
 }
 
 function actualizar_botao() {
     if($botao!=undefined)
         $botao.removeClass('hover');
-    $botao = botoes_disponiveis.eq(botao_actual);
+
+    if(botoes_disponiveis.length > 1)
+        $botao = botoes_disponiveis.eq(botao_actual);
+    else
+        $botao = botoes_disponiveis;
     $botao.addClass('hover');
 }
 
@@ -41,6 +46,9 @@ function power_off() {
 $( document ).ready(function() {
     actualizar_botao();
 
+    $(document).on('ecraMudado',function() {
+        actualizar_botao()
+    })
     //Iniciamos o posicionamento dos botões no sitio certo.
     $("#botao_volante_1 .cima").click(function() {
         descer_botao();
@@ -53,6 +61,7 @@ $( document ).ready(function() {
     $("#botao_volante_2").click(function() {
         //Simula um clique no botao
         $botao.click();
+        botao_actual = 0;
     });
 
     $("#botao_volante_3").click(function() {

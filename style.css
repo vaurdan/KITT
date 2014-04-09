@@ -394,3 +394,16 @@ body {
 .incrementar .botao#diminuir-escuro-botao:before {
    content: "\f056";
 }
+
+.sol-grande {
+    background: url('img/sol.png');
+    background-size: cover;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    /*top: 70px;
+    left: 460px;*/
+    top: -200px;
+    left: 200px;
+    z-index: -1;
+}

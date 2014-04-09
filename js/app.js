@@ -22,25 +22,30 @@ var screens = {
     'escurecimento-manual-ecra': 'definicao'
 };
 
-function escurecer_vidro(percentagem, alertas) {
+function escurecer_vidro(percentagem, alertas, speed, automatico) {
+    if(speed==undefined)
+        speed=300;
     if(undefined==alertas) alertas = true;
+    if(undefined==automatico) automatico = false;
     percentagem = percentagem; //obriga a estar entre 0 e 110 (por casa da barra)
     if(percentagem >= 100) percentagem = 100;
     //Calculamos o valor da opacidade (limite de 0.8)
     var valor_opacity = percentagem/100 * 0.8;
-    $(".escurecimento").fadeTo( 200 , valor_opacity);
+    $(".escurecimento").fadeTo( speed , valor_opacity);
 
     //Depois de ter escurecido, subimos a percentagem
     var percentagem_height = $('.barra-escurecimento').height() * percentagem / 100;
-    $('.percentagem').animate({height:percentagem_height} ,200);
+    $('.percentagem').animate({height:percentagem_height} ,speed);
 
     $(".barra-valor-percentagem").show().animate({
         bottom: percentagem_height - 15,
         left: $(".barra-escurecimento").offset().left + $(".barra-escurecimento").width() + 6
-    }, 200, function() {
+    }, speed, function() {
         //no final da animação
-        if(alertas)
+        if(alertas && !automatico)
             inserir_alerta('sol',"Vidro escurecido para " + Math.round(percentagem) + "%");
+        else if(alertas && automatico)
+            inserir_alerta('sol',"Encadeamento dectectado!","Vidro escurecido para " + Math.round(percentagem) + "%");
 
     }).html( Math.round(percentagem) + "%" );
     if(percentagem==0)
@@ -74,7 +79,10 @@ function mudar_ecra(ecra) {
     curr_screen = $("#"+ecra);
     curr_screen.show(100);
     botoes_disponiveis = $(".definicoes#" + ecra +" .botao");
-
+    $.event.trigger({
+        type: "ecraMudado",
+        ecra: ecra
+    });
 }
 
 function voltar_ecra() {
@@ -99,6 +107,11 @@ function voltar_ecra() {
     }
     curr_buttom = $("."+screens[screen_name]);
     curr_buttom.addClass("botao-selecionado");
+
+    $.event.trigger({
+        type: "ecraMudado",
+        ecra: screen_name
+    });
 }
 
 function inserir_alerta(icon, linha1, linha2) {
@@ -183,6 +196,7 @@ $( document ).ready(function() {
     /** Botões de navegação principal **/
     $(".botao.definicao").click( function() {
         mudar_ecra("definicoes-ecra");
+
         screen_history = new Array('return_to_home'); //Limpamos o historico
 
     })
@@ -203,7 +217,15 @@ $( document ).ready(function() {
         escurecer_vidro(0,false);
         tipo_escurecimento = 0;
         actualizar_botao_escurecimento();
-        inserir_alerta('sol', "Escurecimento automático activado.");
+        inserir_alerta('sol', "Escurecimento automático activado.")
+
+        var pos1 = $('.sol-grande').position();
+
+        $('.sol-grande').delay(2000).animate({ 'top': '70px', 'left': '470px'}, 3000, function(){
+            setTimeout(function() {
+                escurecer_vidro(50,true,2000,true);
+            },1000);
+        });
     });
 
     $("#manual-botao").click(function() {
@@ -211,11 +233,5 @@ $( document ).ready(function() {
         actualizar_botao_escurecimento();
         mudar_ecra('escurecimento-manual-ecra');
     });
-
-    $("#aumentar-escuro-botao").lc
-
-
-
-
 
 });
