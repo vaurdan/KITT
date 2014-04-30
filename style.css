@@ -147,6 +147,19 @@ body {
     z-index: -1;
 }
 
+.botao.camera {
+    padding-top: 37px;
+    padding-bottom: 5px;
+    -webkit-transform: rotate(36deg);
+    transform: rotate(39deg);
+    ms-transform: rotate(36deg);
+    position: absolute;
+    left: 18px;
+    bottom: -1px;
+    z-index: -1;
+}
+
+
 .botao.definicao {
     -webkit-transform: rotate(34deg);
     transform: rotate(34deg);
@@ -178,7 +191,8 @@ body {
 }
 
 .gps-corpo > .botao:hover,
-.gps-corpo > .botao.hover {
+.gps-corpo > .botao.hover,
+.gps-corpo > .botao.selecionado {
     background: gray;
 }
 
@@ -244,12 +258,30 @@ body {
     font-size: 60px;
 }
 
+.spin-icon {
+    font-size: 125px;
+    text-align: center;
+    width: 100%;
+}
+
 .alerta .icon.sol:before {
     content: "\f185";
 }
 
+.alerta .icon.frente:before {
+    content: '\f062';
+}
+
 .alerta .icon.power-off:before {
     content: "\f011";
+}
+
+.alerta .icon.video:before {
+    content: "\f03d";
+}
+
+.alerta .icon.foto:before {
+    content: "\f030";
 }
 
 .alerta .mensagem-dual {
@@ -376,7 +408,8 @@ body {
 }
 
 .incrementar .botao:hover,
-.incrementar .botao.hover {
+.incrementar .botao.hover,
+.incrementar .botao.selecionado {
     color: black;
 }
 
@@ -406,4 +439,244 @@ body {
     top: -200px;
     left: 200px;
     z-index: -1;
+}
+#camera-ecra { font-family: FontAwesome; }
+
+#camera-ecra .foto {
+    width: 75px;
+    height: 75px;
+    float: left;
+    margin-top: 35px;
+    margin-left: 10px;
+    font-size: 75px;
+    line-height: 80px;
+}
+
+#camera-ecra .video {
+    width: 75px;
+    height: 75px;
+    float: right;
+    margin-top: 35px;
+    margin-right: 10px;
+    font-size: 75px;
+    line-height: 80px;
+}
+
+#camera-ecra .video:after {
+    content: "\f03d";
+}
+
+#camera-ecra .foto:after {
+    content: "\f030";
+}
+
+.botao.video,
+.botao.foto {
+    position: relative;
+}
+
+.botao > .info {
+    font-size: 20px;
+    position: absolute;
+    bottom: -47px;
+    width: 100%;
+}
+
+.gravacao {
+    width: 400px;
+    height: 300px;
+    border: 2px dashed red;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: url("img/estrada.jpg");
+    background-size: cover;
+    opacity: 0.8;
+    display: none;
+}
+
+.gravacao.foto {
+}
+
+.gravacao.video > .rec {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.gravacao.video > .rec > .bolinha {
+    border-radius: 99999px;
+    width: 20px;
+    height: 20px;
+    background: red;
+    float: left;
+    margin-right: 10px;
+}
+
+.gravacao.video > .rec > .texto {
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-right: 10px;
+    color: red;
+    font-weight: bold;
+    font-size:20px;
+}
+
+.gravacao.video .stop {
+    padding: 5px 10px;
+    border: 2px solid white;
+    position: absolute;
+    top: 40px;
+    left: 11px;
+    color: white;
+    font-weight: bold;
+    background: red;
+}
+
+.retrovisor-conteudo > .gravacao-video .rec {
+    margin-top: 10px;
+    width: 50px;
+    height: 15px;
+    background: rgba(0,0,0,0.5);
+    line-height: 15px;
+    display: none;
+}
+
+.retrovisor-conteudo > .gravacao-video .bolinha {
+    border-radius: 99999px;
+    width: 10px;
+    height: 10px;
+    background: red;
+    float: left;
+    margin-right: 5px;
+    margin-top: 2px;
+}
+
+
+.retrovisor-conteudo > .gravacao-video .texto {
+    float: left;
+    margin-right: 5px;
+    color: red;
+    font-weight: bold;
+    font-size:10px;
+}
+
+.shutter {
+    font-family: FontAwesome;
+    font-size: 40px;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: red;
+}
+
+.gravacao.foto.blink {
+    background: white;
+}
+
+.shutter:before {
+    content: "\f192";
+}
+
+.navto {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 25px;
+}
+
+.mini-alerta {
+    margin-top: 10px;
+}
+
+.mini-alerta .texto {
+    float: left;
+    font-size: 16px;
+    width: 150px;
+    line-height: 25px;
+    margin-left: 10px;
+}
+
+.mini-alerta .icon {
+    font-family: FontAwesome;
+    font-size: 50px;
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+
+.icon.stop:after {
+    content: '\f071';
+}
+
+.icon.interrupcao:after {
+    content: '\f018';
+}
+
+.icon.transito {
+    background: url('img/transito.png');
+    background-size: cover;
+}
+
+.tipo-alerta {
+    font-family: FontAwesome;
+}
+
+.tipo-alerta.tipo-actual {
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    font-size: 75px;
+    top: 40px;
+    left: 75px;
+}
+
+.tipo-alerta.tipo-antes {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    font-size: 50px;
+    left: 10px;
+    top: 10px;
+}
+
+.tipo-alerta.tipo-depois {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    font-size: 50px;
+    right: 10px;
+    top: 10px;
+}
+
+.texto-alerta {
+    position: absolute;
+    top: 113px;
+    width: 96%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+#esq-tipo-botao {
+    width: 45px;
+    font-size: 45px;
+    top: 60px;
+    position: absolute;
+    left: 10px;
+}
+
+#dir-tipo-botao {
+    width: 45px;
+    font-size: 45px;
+    top: 60px;
+    position: absolute;
+    right: 10px;
+}
+
+#esq-tipo-botao:after {
+    content: '\f060';
+}
+#dir-tipo-botao:after {
+    content: '\f061';
 }

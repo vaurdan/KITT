@@ -6,11 +6,17 @@
     <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/navegacao.js"></script>
+    <script type="text/javascript" src="js/gravacao.js"></script>
+    <script type="text/javascript" src="js/gps.js"></script>
+    <script type="text/javascript" src="js/alertas.js"></script>
+
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <meta charset="UTF-8" />
 
 </head>
 <body>
+<img src="img/estrada_seta.jpg" style="display: none;" />
+<img src="img/staticmap_caminho.png.png" style="display: none;" />
     <div class="vidro-carro">
         <div class="sol-grande"></div>
 
@@ -18,21 +24,42 @@
         </div>
         <div class="retrovisor-corpo">
            <div class="retrovisor-conteudo">
+               <div class="gravacao-video">
+                   <div class="rec">
+                       <div class="bolinha"></div>
+                       <div class="texto">REC</div>
+                   </div>
+               </div>
            </div>
         </div>
 
         <div class="gps-corpo">
             <div class="localizacao"></div>
             <div class="imagem">
+                <!-- ecra navegação -->
+                <div class="definicoes" id="navegacao-ecra">
+                    <h2>Para onde quer ir?</h2>
+                    <input type="text" class="navto" value="Rua das Petalas"/>
+                    <div class="botao" id="iniciar-nav-botao">Navegar</div>
+                </div>
+                <!-- ecra de cancelar navegação -->
+                <div class="definicoes" id="cancelar-navegacao-ecra">
+                    <h2>Navegação</h2>
+                    <div><span style="font-weight: bold;">Destino: </span><span id="destino">XXX</span></div>
+                    <div class="botao" id="cancelar-nav-botao">Cancelar destino</div>
+                </div>
+                <!-- ecra definicoes -->
                 <div class="definicoes" id="definicoes-ecra">
                     <h2>Definições</h2>
                     <div class="botao" id="escurecimento-botao">Escurecimento</div>
                 </div>
+                <!-- ecra tipo escurecimento -->
                 <div class="definicoes" id="escurecimento-ecra">
                     <h2>Escurecimento</h2>
                     <div class="botao" id="manual-botao">Modo Manual</div>
                     <div class="botao" id="automatico-botao">Modo Automático</div>
                 </div>
+                <!-- ecra escurecimento manual -->
                 <div class="definicoes" id="escurecimento-manual-ecra">
                     <h2>Escurecimento Manual</h2>
                     <div class="incrementar" style="width: 100%;">
@@ -42,16 +69,66 @@
                     <div style="clear:both;"></div>
                     <div class="botao" id="limpar-botao">Limpar</div>
                 </div>
+                <!--Ecra alertas-->
                 <div class="definicoes" id="alertas-ecra">
                     <h2>Alertas</h2>
-                    <p>Não implementado</p>
+                    <div class="botao" id="ver-alertas-botao">Ver Alertas</div>
+                    <div class="botao" id="enviar-alertas-botao">Enviar Alertas</div>
+                </div>
+                <div class="definicoes" id="ver-alertas-ecra">
+                    <h2>Alertas mais próximos</h2>
+                    <div class="mini-alerta">
+                        <div class="icon stop"></div>
+                        <div class="texto"><strong>Operação Stop</strong><br/>2.9 km</div>
+                    </div>
+                    <div style="clear: both;"></div>
+                    <div class="mini-alerta">
+                        <div class="icon interrupcao"></div>
+                        <div class="texto"><strong>Interrupção de via</strong><br/>9.4 km</div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+                <div class="definicoes" id="enviar-alertas-ecra">
+                    <div class="tipo-alerta tipo-antes icon interrupcao"></div>
+                    <div class="tipo-alerta tipo-actual icon stop"></div>
+                    <div class="tipo-alerta tipo-depois icon transito"></div>
+                    <div class="texto-alerta">Operação Stop</div>
+                    <div class="incrementar" style="width: 100%;">
+                        <div class="botao" id="esq-tipo-botao"></div>
+                        <div class="botao" id="dir-tipo-botao"></div>
+                    </div>
+                    <div class="botao" id="partilhar-botao" style="bottom: 10px; position: absolute; width: 190px">Partilhar</div>
+                </div>
+
+                <!-- Gravacao de foto/video -->
+                <div class="definicoes" id="camera-ecra">
+                    <h2>Gravação</h2>
+                    <div class="incrementar">
+                        <div class="botao foto"> <div class="info">Foto</div></div>
+                        <div class="botao video"><div class="info">Video</div></div>
+
+                    </div>
+                </div>
+                <!-- A gravar video -->
+                <div class="definicoes" id="gravar-video-ecra">
+                    <h2>A Gravar Vídeo...</h2>
+                    <p>Para cancelar, prima voltar.</p>
+                </div>
+
+                <div class="definicoes" id="partilha-sucesso-ecra">
+                    <h2>Enviado!</h2>
+                    <p>O alerta foi enviado com sucesso.</p>
+                    <div class="botao" id="voltar-partilha-botao">Voltar</div>
                 </div>
             </div>
             <div class="botao navegar">Navegar</div>
             <div class="botao alertas">Alertas</div>
 
             <div class="botao definicao">Definições</div>
+
             <div class="botao voltar">Voltar</div>
+            <div class="botao camera">Câmera</div>
+
         </div>
         <div class="barra-escurecimento">
             <div class="percentagem" style="height: 0%"></div>
@@ -67,6 +144,17 @@
             <div class="botao comhover" id="botao_volante_4"></div>
 
         </div>
+        <div class="gravacao video">
+            <div class="rec">
+                <div class="bolinha"></div>
+                <div class="texto">REC</div>
+            </div>
+            <div class="stop">STOP</div>
+        </div>
+        <div class="gravacao foto">
+            <div class="shutter"></div>
+        </div>
+
     </div>
 </body>
 </html>

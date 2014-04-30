@@ -47,7 +47,9 @@ $( document ).ready(function() {
     actualizar_botao();
 
     $(document).on('ecraMudado',function() {
+        botao_actual = 0;
         actualizar_botao()
+
     })
     //Iniciamos o posicionamento dos botões no sitio certo.
     $("#botao_volante_1 .cima").click(function() {
@@ -61,7 +63,6 @@ $( document ).ready(function() {
     $("#botao_volante_2").click(function() {
         //Simula um clique no botao
         $botao.click();
-        botao_actual = 0;
     });
 
     $("#botao_volante_3").click(function() {

@@ -10,6 +10,7 @@ var curr_buttom;
 var screen_history = new Array();
 var botoes_disponiveis = [];
 var tipo_escurecimento = 0; //0 - Automático; 1 - Manual
+
 /**
  * Array onde se guardam os ecrãs.
  * Primeiro elemento é o ecrã, o segundo é o botão principal activo.
@@ -19,8 +20,22 @@ var screens = {
     'definicoes-ecra': 'definicao',
     'alertas-ecra': 'alertas',
     'navegacao-ecra': 'navegacao',
-    'escurecimento-manual-ecra': 'definicao'
+    'escurecimento-manual-ecra': 'definicao',
+    'camera-ecra': 'camera',
+    'navegacao-ecra': 'navegar',
+    'cancelar-navegacao-ecra': 'navegar',
+    'ver-alertas-ecra': 'alertas',
+    'enviar-alertas-ecra': 'alertas',
+    'partilha-sucesso-ecra': 'alertas',
+
 };
+
+function ir_para_home() {
+    screen_history = new Array('return_to_home'); //Limpamos o historico
+    voltar_ecra();
+    curr_screen=undefined;
+}
+
 
 function escurecer_vidro(percentagem, alertas, speed, automatico) {
     if(speed==undefined)
@@ -61,6 +76,16 @@ function escurecer_vidro(percentagem, alertas, speed, automatico) {
 
 }
 
+function processar_ecra(texto) {
+    $("#processing-ecra").remove();
+
+    var elemento = $('<div></div>').hide().addClass('definicoes').attr('id','processing-ecra');
+    elemento.append( $("<h2></h2>").text(texto) );
+    elemento.append( $("<i></i>").addClass('fa').addClass('fa-cog').addClass('fa-spin').addClass('spin-icon') );
+    $(".imagem").append(elemento);
+    mudar_ecra("processing-ecra");
+}
+
 function mudar_ecra(ecra) {
     if(curr_screen != undefined && curr_screen.attr('id')!=ecra) {
        //Se já temos um ecrã
@@ -86,8 +111,12 @@ function mudar_ecra(ecra) {
 }
 
 function voltar_ecra() {
-    if(curr_screen==undefined || screen_history.length == 0)
+    if(curr_screen==undefined || screen_history.length == 0) {
+        $.event.trigger({
+            type: "semEcras"
+        });
         return;
+    }
     curr_screen.hide();
     var screen_name = screen_history.pop();
     //Se já estamos na home, nao continuamos
@@ -95,6 +124,7 @@ function voltar_ecra() {
         if(curr_buttom!=undefined) curr_buttom.removeClass("botao-selecionado");
         screen_history = new Array();
         botoes_disponiveis = $(".gps-corpo > .botao");
+
         return;
     }
 
@@ -148,6 +178,8 @@ function actualizar_botao_escurecimento() {
 }
 
 
+
+
 $( document ).ready(function() {
     //Inicializamos a escuridão do ecrã a 0
     escurecer_vidro(0,false);
@@ -194,17 +226,20 @@ $( document ).ready(function() {
 
 
     /** Botões de navegação principal **/
+
     $(".botao.definicao").click( function() {
         mudar_ecra("definicoes-ecra");
-
         screen_history = new Array('return_to_home'); //Limpamos o historico
-
     })
 
     $(".botao.alertas").click(function() {
         mudar_ecra('alertas-ecra');
         screen_history = new Array('return_to_home'); //Limpamos o historico
+    });
 
+    $(".botao.camera").click(function() {
+        mudar_ecra('camera-ecra');
+        screen_history = new Array('return_to_home'); //Limpamos o historico
     });
 
     $(".botao.voltar").click(function() {
@@ -235,3 +270,23 @@ $( document ).ready(function() {
     });
 
 });
+
+var preload_pictures = function (picture_urls, callback) {
+    var loaded = 0;
+
+    for (var i = 0, j = picture_urls.length; i < j; i++) {
+        var img = new Image();
+
+        img.onload = function () {
+            if (++loaded == picture_urls.length && callback) {
+                callback();
+            }
+        }
+
+        img.src = picture_urls[i];
+    }
+};
+
+preload_pictures(['/img/estrada_seta.jpg'], function () {
+    console.log("a");
+})
